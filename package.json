@@ -6,13 +6,18 @@
     "react-router-dom": "^4.1.1"
   },
   "devDependencies": {
+    "@17media/eslint-config-17media": "^1.1.0",
     "babel-core": "6.25.0",
+    "babel-eslint": "^7.2.1",
     "babel-loader": "7.0.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-runtime": "6.23.0",
     "css-loader": "0.28.4",
+    "eslint": "^3.19.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-react": "^6.10.3",
     "file-loader": "0.11.2",
     "style-loader": "0.18.2",
     "stylus": "^0.54.5",
@@ -24,7 +29,8 @@
     "deploy": "npm run build && npm run subtree",
     "subtree": "git subtree push --prefix build origin gh-pages",
     "build": "webpack -p",
-    "start": "webpack-dev-server --hot --inline"
+    "start": "webpack-dev-server --hot --inline",
+    "lint": "eslint src/"
   },
   "babel": {
     "presets": [

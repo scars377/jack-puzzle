@@ -1,5 +1,5 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import {
   HashRouter as Router,
   Redirect,
@@ -16,24 +16,24 @@ import DropJack from './DropJack';
 import Roulette from './roulette/Roulette';
 
 const pages = [
-  {path: '/puzzle', label: 'Puzzle', component: Puzzle},
-  {path: '/drop', label: 'Drop', component: DropJack},
-  {path: '/roulette', label: 'Roulette', component: Roulette},
-]
+  { path: '/puzzle', label: 'Puzzle', component: Puzzle },
+  { path: '/drop', label: 'Drop', component: DropJack },
+  { path: '/roulette', label: 'Roulette', component: Roulette },
+];
 
 render(
   <Router>
-    <div className='app'>
-      <div className='app-menu'>
-        {pages.map(page=>(
-          <NavLink to={page.path} key={page.path} activeClassName='active'>{page.label}</NavLink>
+    <div className="app">
+      <div className="app-menu">
+        {pages.map(page => (
+          <NavLink to={page.path} key={page.path} activeClassName="active">{page.label}</NavLink>
         ))}
       </div>
-      <div className='app-content'>
+      <div className="app-content">
         <Switch>
-          <Redirect to='/puzzle' from='/'/>
-          {pages.map(page=>(
-            <Route path={page.path} component={page.component}/>
+          <Redirect to="/puzzle" from="/" />
+          {pages.map(page => (
+            <Route path={page.path} component={page.component} />
           ))}
         </Switch>
       </div>

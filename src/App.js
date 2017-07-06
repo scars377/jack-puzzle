@@ -9,18 +9,18 @@ class App extends Component {
     stepCount: 0,
   }
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.reader = new FileReader();
-    this.reader.onload = ()=>this.setState({image: this.reader.result})
+    this.reader.onload = () => this.setState({ image: this.reader.result });
   }
 
-  loadImage = e =>{
+  loadImage = (e) => {
     this.reader.readAsDataURL(e.target.files[0]);
   }
 
   reset = () => {
-    this.setState({image: jack});
+    this.setState({ image: jack });
   }
 
   handleBoardSwap = () => {
@@ -32,13 +32,13 @@ class App extends Component {
     const { image, stepCount } = this.state;
 
     return (
-      <div className='app'>
-        <div className='img sample' style={{backgroundImage: `url('${image}')`}}/>
+      <div className="app">
+        <div className="img sample" style={{ backgroundImage: `url('${image}')` }} />
         <Board image={image} swap={this.handleBoardSwap} />
         <StepCounter stepCount={stepCount} />
-        <div className='input'>
-          <input type='file' accept='image/*' onChange={this.loadImage} />
-          {image===jack?null:<button onClick={this.reset}>Jack</button>}
+        <div className="input">
+          <input type="file" accept="image/*" onChange={this.loadImage} />
+          {image === jack ? null : <button onClick={this.reset}>Jack</button>}
         </div>
       </div>
     );

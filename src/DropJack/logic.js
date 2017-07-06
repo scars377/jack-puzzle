@@ -1,38 +1,38 @@
 function init() {
-  //Aliases
-  var Texture = PIXI.Texture;
-  var Sprite = PIXI.Sprite;
+  // Aliases
+  const Texture = PIXI.Texture;
+  const Sprite = PIXI.Sprite;
 
-  var GRAVITY = 1;
-  var DECAY = 0.98;
-  var STATES = ["fall", "game", "kill"];
-  var logic = {
+  const GRAVITY = 1;
+  const DECAY = 0.98;
+  const STATES = ['fall', 'game', 'kill'];
+  const logic = {
     dropCounter: 40,
     state: STATES[0],
-    setState: function (pState) {
+    setState(pState) {
       this.state = pState;
-      if (this.state == "fall") {
-        var newTexture = getNextTexture();     
+      if (this.state == 'fall') {
+        const newTexture = getNextTexture();
         sheep.visible = true;
         sheep.filters = [sheepBlurFilter];
-      };
+      }
     },
-    updatePointer: function () {
-      var p = renderer.plugins.interaction.mouse.global;
+    updatePointer() {
+      const p = renderer.plugins.interaction.mouse.global;
       if (p.x < 0 || p.y < 0) {
         p.x = window.innerWidth >> 1;
         p.y = window.innerHeight / 3;
-      };
+      }
       pointer.x += (p.x - pointer.x) * 0.17;
       pointer.y += (p.y - pointer.y) * 0.17;
       return p;
     },
-    reset: function () {
+    reset() {
       sheep.y = -400;
       sheep.vx = sheep.vy = 0;
       this.dropCounter = 40;
     },
-    onTick: function () {
+    onTick() {
       switch (this.state) {
         case STATES[0]:
           sheep.vy += GRAVITY;
@@ -43,7 +43,7 @@ function init() {
           if (sheep.y > pointer.y) {
             ball.visible = true;
             this.setState(STATES[1]);
-          };
+          }
           var p = this.updatePointer();
           sheep.x = p.x;
           ball.x = sheep.x;
@@ -78,40 +78,39 @@ function init() {
           if (sheep.y > window.innerHeight + 100) {
             this.reset();
             this.setState(STATES[0]);
-          };
+          }
           break;
       }
-    }
+    },
   };
 
 
-
-  var stage = new PIXI.Container();
+  const stage = new PIXI.Container();
   var renderer = PIXI.autoDetectRenderer(
     window.innerWidth,
-    640, 
+    640,
     { antialias: true }
   );
   renderer.backgroundColor = 0xffffff;
-  renderer.view.style.display = "block";
+  renderer.view.style.display = 'block';
   document.getElementById('canvas_wrap').appendChild(renderer.view);
 
 
-  var shape = new PIXI.Graphics();  
+  var shape = new PIXI.Graphics();
   window.shape = shape;
   stage.addChild(shape);
 
-  var textureIndex = -1;
-  var textureArr = [
-    PIXI.Texture.fromImage( require('../jack_thumb.png') )    
-  ]
+  let textureIndex = -1;
+  const textureArr = [
+    PIXI.Texture.fromImage(require('../jack_thumb.png')),
+  ];
   var getNextTexture = function () {
     textureIndex++;
     textureIndex %= textureArr.length;
     return textureArr[textureIndex];
-  }
-  var texture = textureArr[0];
-  var sheepAvator = new PIXI.Sprite(texture);
+  };
+  const texture = textureArr[0];
+  const sheepAvator = new PIXI.Sprite(texture);
   sheepAvator.pivot.set(95, 50);
   sheepAvator.vx = 0;
   sheepAvator.vy = 0;
@@ -121,13 +120,12 @@ function init() {
   var sheep = sheepAvator;
 
 
-
   var sheepBlurFilter = new PIXI.filters.BlurFilter();
   sheep.filters = [sheepBlurFilter];
 
   var pointer = new PIXI.Graphics();
   pointer.beginFill(0xFF3300);
-  pointer.drawCircle(0,0,10)
+  pointer.drawCircle(0, 0, 10);
   stage.addChild(pointer);
 
   var ball = new PIXI.Graphics();
@@ -137,8 +135,8 @@ function init() {
   ball.drawCircle(0, 0, 8);
   stage.addChild(ball);
 
-  var w2 = window.innerWidth >> 1;
-  var h2 = window.innerHeight / 3;
+  const w2 = window.innerWidth >> 1;
+  const h2 = window.innerHeight / 3;
   sheep.y = -1000;
   sheep.rotation = Math.PI / -2;
   sheep.x = pointer.x = ball.x = w2;
@@ -146,21 +144,21 @@ function init() {
 
 
   function chainerBall(ball, lineLength) {
-    var pointerX = pointer.x;
-    var pointerY = pointer.y;
-    var ballX = ball.x;
-    var ballY = ball.y;
-    var ballNewX = ball.x;
-    var ballNewY = ball.y;
+    const pointerX = pointer.x;
+    const pointerY = pointer.y;
+    const ballX = ball.x;
+    const ballY = ball.y;
+    let ballNewX = ball.x;
+    let ballNewY = ball.y;
     ball.vy += GRAVITY;
     ball.vx *= DECAY;
     ball.vy *= DECAY;
     ballNewX += ball.vx;
     ballNewY += ball.vy;
-    var a = pointerX - ballNewX;
-    var b = pointerY - ballNewY;
-    var distance = Math.sqrt(a * a + b * b);
-    var g = shape;
+    const a = pointerX - ballNewX;
+    const b = pointerY - ballNewY;
+    const distance = Math.sqrt(a * a + b * b);
+    const g = shape;
     if (distance > lineLength) {
       ballNewX = pointerX - (a / distance * lineLength);
       ballNewY = pointerY - (b / distance * lineLength);
@@ -174,8 +172,8 @@ function init() {
       g.clear();
       g.lineStyle(4, 0);
       g.moveTo(ballNewX, ballNewY);
-      var controlX = (ballNewX + pointerX) / 2;
-      var controlY = (ballNewY + pointerY) / 2;
+      const controlX = (ballNewX + pointerX) / 2;
+      const controlY = (ballNewY + pointerY) / 2;
       g.quadraticCurveTo(controlX, controlY + (lineLength - distance), pointerX, pointerY);
     }
     // 3.0.7 Graphics Bug
@@ -186,25 +184,25 @@ function init() {
   }
 
   function chainerSheep(ball, sheep, lineLength) {
-    var ballX = ball.x;
-    var ballY = ball.y;
-    var oldx = sheep.x;
-    var oldy = sheep.y;
-    var newX = sheep.x;
-    var newY = sheep.y;
+    const ballX = ball.x;
+    const ballY = ball.y;
+    const oldx = sheep.x;
+    const oldy = sheep.y;
+    let newX = sheep.x;
+    let newY = sheep.y;
     sheep.vy += GRAVITY;
     sheep.vx *= DECAY;
     sheep.vy *= DECAY;
     newX += sheep.vx;
     newY += sheep.vy;
-    var a = ballX - newX;
-    var b = ballY - newY;
-    var distance = Math.sqrt(a * a + b * b);
-    var PI = Math.PI;
-    var rotation = sheep.rotation;
-    var angle = Math.atan2(b, a);
-    var radian = angle;
-    var newAngle = radian - rotation;
+    const a = ballX - newX;
+    const b = ballY - newY;
+    const distance = Math.sqrt(a * a + b * b);
+    const PI = Math.PI;
+    let rotation = sheep.rotation;
+    const angle = Math.atan2(b, a);
+    const radian = angle;
+    let newAngle = radian - rotation;
     if (newAngle > PI) {
       newAngle -= PI * 2;
     } else if (newAngle < -PI) {
@@ -226,7 +224,6 @@ function init() {
   }
 
 
-
   function animate() {
     logic.onTick();
     renderer.render(stage);
@@ -237,5 +234,5 @@ function init() {
 }
 
 export default {
-  init
+  init,
 };

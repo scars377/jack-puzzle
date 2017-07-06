@@ -23,7 +23,7 @@ class App extends Component {
     this.setState({image: jack});
   }
 
-  handleBoardKeydown = () => {
+  handleBoardSwap = () => {
     const stepCount = this.state.stepCount += 1;
     this.setState({ stepCount });
   }
@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div className='app'>
         <div className='img sample' style={{backgroundImage: `url('${image}')`}}/>
-        <Board image={image} keydown={this.handleBoardKeydown} />
+        <Board image={image} swap={this.handleBoardSwap} />
         <StepCounter stepCount={stepCount} />
         <div className='input'>
           <input type='file' accept='image/*' onChange={this.loadImage} />

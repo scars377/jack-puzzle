@@ -26,6 +26,10 @@ const config = {
       include: src,
       loaders: ['style-loader', 'css-loader'],
     },{
+      test: /\.styl$/,
+      include: src,
+      loaders: ['style-loader', 'css-loader', 'stylus-loader'],
+    },{
       test: /\.(html|png)$/,
       include: src,
       loaders: ['file-loader?name=[name].[ext]'],

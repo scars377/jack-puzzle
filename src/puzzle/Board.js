@@ -13,6 +13,10 @@ class Board extends Component {
     window.addEventListener('keydown', this.keydown);
   }
 
+  componentWillUnmount(){
+    window.removeEventListener('keydown', this.keydown);
+  }
+
   componentWillReceiveProps(nextProps) {
     const {image} = this.props;
     if(image !== nextProps.image) this.shuffle();

@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {
   HashRouter as Router,
+  Redirect,
   Switch,
   Route,
   NavLink,
@@ -30,6 +31,7 @@ render(
       </div>
       <div className='app-content'>
         <Switch>
+          <Redirect to='/puzzle' from='/'/>
           {pages.map(page=>(
             <Route path={page.path} component={page.component}/>
           ))}

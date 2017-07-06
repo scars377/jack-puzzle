@@ -24,9 +24,9 @@ class Roulette extends Component {
       duration: 1000,
       start: this.state.speeds.slice(),
       end: [
-        0.02 + Math.random() * 0.02,
-        0.02 + Math.random() * 0.02,
-        0.02 + Math.random() * 0.02,
+        0.02 + (Math.random() * 0.02),
+        0.02 + (Math.random() * 0.02),
+        0.02 + (Math.random() * 0.02),
       ],
     };
   }
@@ -48,7 +48,7 @@ class Roulette extends Component {
     if (n >= 1) {
       speeds = end;
     } else {
-      speeds = start.map((p, i) => (p + n * (end[i] - start[i])));
+      speeds = start.map((p, i) => (p + (n * (end[i] - start[i]))));
     }
 
     this.setState({

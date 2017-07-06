@@ -31,10 +31,10 @@ render(
       </div>
       <div className="app-content">
         <Switch>
-          <Redirect to="/puzzle" from="/" />
           {pages.map(page => (
-            <Route path={page.path} component={page.component} />
+            <Route key={page.label} path={page.path} component={page.component} />
           ))}
+          <Redirect to="/puzzle" from="/" />
         </Switch>
       </div>
     </div>

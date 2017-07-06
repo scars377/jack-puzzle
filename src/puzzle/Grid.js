@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Grid = ({ pos, id, visible, image }) => {
   const x = pos % 3;
@@ -20,6 +21,13 @@ const Grid = ({ pos, id, visible, image }) => {
       />
     </div>
   );
+};
+
+Grid.propTypes = {
+  pos: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  visible: PropTypes.bool,
+  image: PropTypes.string.isRequired,
 };
 
 export default Grid;

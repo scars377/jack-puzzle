@@ -1,3 +1,4 @@
+/* eslint-disable */
 function init() {
   // Aliases
   const Texture = PIXI.Texture;
@@ -236,3 +237,4 @@ function init() {
 export default {
   init,
 };
+/* eslint-enable */

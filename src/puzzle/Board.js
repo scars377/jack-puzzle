@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Grid from './Grid';
 
 const EMPTY_ID = 8;
 
 class Board extends Component {
+  static propTypes = {
+    image: PropTypes.string.isRequired,
+    swap: PropTypes.func.isRequired,
+  };
+
   state = {
     grids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
   }
@@ -13,16 +19,16 @@ class Board extends Component {
     window.addEventListener('keydown', this.keydown);
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.keydown);
-  }
-
   componentWillReceiveProps(nextProps) {
     const { image } = this.props;
     if (image !== nextProps.image) this.shuffle();
   }
 
-  shuffle = (e) => {
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.keydown);
+  }
+
+  shuffle = () => {
     const grids = this.state.grids.slice();
     grids.sort(() => Math.random() - 0.5);
     this.setState({ grids });

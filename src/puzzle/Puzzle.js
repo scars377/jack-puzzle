@@ -5,15 +5,15 @@ import jack from '../jack.png';
 import './puzzle.styl';
 
 class Puzzle extends Component {
-  state = {
-    image: jack,
-    stepCount: 0,
-  }
-
   constructor(props) {
     super(props);
     this.reader = new FileReader();
     this.reader.onload = () => this.setState({ image: this.reader.result });
+  }
+
+  state = {
+    image: jack,
+    stepCount: 0,
   }
 
   loadImage = (e) => {
@@ -25,8 +25,9 @@ class Puzzle extends Component {
   }
 
   handleBoardSwap = () => {
-    const stepCount = this.state.stepCount += 1;
-    this.setState({ stepCount });
+    this.setState(({ stepCount }) => ({
+      stepCount: stepCount + 1,
+    }));
   }
 
   render() {

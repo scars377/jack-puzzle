@@ -45,3 +45,23 @@ html, body {
   position: relative;
   display: inline-block
 }
+
+.step {
+  font-size: 30px;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.step .value {
+  color: rgba(40, 212, 40, 1);
+}
+
+.step.unfamiliar .value {
+  color: rgba(236, 20, 20, 1);
+}
+
+.step.unfamiliar .note {
+  font-size: 16px;
+  margin: 0;
+  color: rgba(177, 168, 168, .7);
+}

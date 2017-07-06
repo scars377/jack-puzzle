@@ -25,6 +25,7 @@ class Board extends Component {
   }
 
   keydown = e => {
+    this.props.keydown();
     const i = this.state.grids[EMPTY_ID]; //zero position
     switch(e.keyCode){
       case 37: //left

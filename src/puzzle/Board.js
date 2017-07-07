@@ -56,6 +56,20 @@ class Board extends Component {
     this.props.swap();
   }
 
+  handleClick = (pos) => () => {
+    const zeroPos = this.state.grids[EMPTY_ID];
+    const isInvalid = pos !== zeroPos - 1 // left
+      && pos !== zeroPos + 1 // right
+      && pos !== zeroPos - 3 // up
+      && pos !== zeroPos + 3; // down
+
+    if (isInvalid) {
+      return;
+    }
+
+    this.swap(zeroPos, pos);
+  }
+
   render() {
     const {grids} = this.state;
     const {image} = this.props;
@@ -69,6 +83,7 @@ class Board extends Component {
             id={id}
             image={image}
             visible={id!==EMPTY_ID}
+            handleClick={this.handleClick(pos)}
           />
         ))}
       </div>

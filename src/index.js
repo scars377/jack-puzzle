@@ -31,9 +31,11 @@ render(
       </div>
       <div className='app-content'>
         <Switch>
-          <Redirect to='/puzzle' from='/'/>
+          <Route path='/' exact>
+            <Redirect to='/puzzle'/>
+          </Route>
           {pages.map(page=>(
-            <Route path={page.path} component={page.component}/>
+            <Route path={page.path} component={page.component} key={page.path}/>
           ))}
         </Switch>
       </div>

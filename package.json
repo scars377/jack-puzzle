@@ -14,6 +14,7 @@
     "babel-runtime": "6.23.0",
     "css-loader": "0.28.4",
     "file-loader": "0.11.2",
+    "rimraf": "^2.6.1",
     "style-loader": "0.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
@@ -21,8 +22,7 @@
     "webpack-dev-server": "2.5.0"
   },
   "scripts": {
-    "deploy": "npm run build && npm run subtree",
-    "subtree": "git subtree push --prefix build origin gh-pages",
+    "deploy": "npm run build && ./deploy.sh",
     "build": "webpack -p",
     "start": "webpack-dev-server --hot --inline"
   },
@@ -32,5 +32,8 @@
       "react",
       "stage-2"
     ]
+  },
+  "repository": {
+    "url": "git@github.com:scars377/jack-puzzle.git"
   }
 }
